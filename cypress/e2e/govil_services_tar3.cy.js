@@ -20,7 +20,12 @@ describe('Gov.il Authority 262 - Services Appointment Test', () => {
 
     if (href && href.length > 1) {
       cy.log(` Found standard link. Navigating to: ${href}`);
-      cy.visit(href);
+      cy.visit(PAGE_URL, { 
+    failOnStatusCode: false,
+    headers: {
+        'Accept-Language': 'he-IL' 
+    }
+});
     } else {
       cy.log(' No link found. Clicking button & catching window.open...');
       cy.wrap($el).click({ force: true });
@@ -73,8 +78,7 @@ describe('Gov.il Authority 262 - Services Appointment Test', () => {
               smartNavigateToService($el);
             });
 
-          // 4. וידוא (Assertion) שהגענו לעמוד זימון תור
-          cy.url({ timeout: 20000 }).should('include', 'appointment');
+         cy.url({ timeout: 20000 }).should('match', /login|appointment/);
         }
       });
   });

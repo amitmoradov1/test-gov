@@ -2,6 +2,7 @@ describe("Gov.il API + Static Intercepts (Only working requests)", () => {
 
   it("Intercepts and validates real requests executed during Cypress run", () => {
 
+    //כל תקשורת מהסוג הזה תסמן אותה ותן כינוי
     cy.intercept("GET", "**/govilHF/api/GetHeaderMoreData*").as("header");
     cy.intercept("GET", "**/trends.json*").as("trends");
 
